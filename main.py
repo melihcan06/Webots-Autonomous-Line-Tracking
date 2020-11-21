@@ -32,25 +32,6 @@ def hough_transform(img1, rho=1, theta=np.pi / 180, thresh=35, min_theta=0.0, ma
     return lines
 
 
-def return_road_lines2(lines, h, w):
-    road_lines = np.zeros((h, w), dtype="uint8")
-
-    for idx in range(len(lines)):
-        for rho, theta in lines[idx]:
-            a = np.cos(theta)
-            b = np.sin(theta)
-            x0 = a * rho
-            y0 = b * rho
-
-            x1 = int(x0 + 1000 * (-b))
-            y1 = int(y0 + 1000 * (a))
-            x2 = int(x0 - 1000 * (-b))
-            y2 = int(y0 - 1000 * (a))
-
-        cv2.line(road_lines, (x1, y1), (x2, y2), (255, 0, 0), 2)
-
-    return road_lines
-
 def return_road_lines(lines, h, w):
     road_lines = np.zeros((h, w), dtype="uint8")
     if lines is None:
